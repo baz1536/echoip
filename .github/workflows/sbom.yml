@@ -21,7 +21,7 @@ jobs:
         run: go install github.com/CycloneDX/cyclonedx-gomod/cmd/cyclonedx-gomod@latest
 
       - name: Generate SBOM
-        run: cyclonedx-gomod app -output sbom.json -json -main .
+        run: cyclonedx-gomod app -output sbom.json -json -main cmd/echoip
 
       - name: Archive SBOM as artefact
         uses: actions/upload-artifact@v4
