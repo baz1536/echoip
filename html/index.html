@@ -146,6 +146,22 @@
                   <td>{{ .Hostname }}</td>
                 </tr>
                 {{ end }}
+                {{ if .UserAgent }}
+                <tr>
+                  <th>User agent</th>
+                  <td>{{ .UserAgent.Product }} {{ .UserAgent.Version }}</td>
+                </tr>
+                {{ if .UserAgent.Comment }}
+                <tr>
+                  <th>User agent: Comment</th>
+                  <td>{{ .UserAgent.Comment }}</td>
+                </tr>
+                {{ end }}
+                <tr>
+                  <th>User agent: Raw</th>
+                  <td>{{ .UserAgent.RawValue }}</td>
+                </tr>
+                {{ end }}
               </tbody>
             </table>
           </div>
