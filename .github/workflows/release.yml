@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      actions: write
 
     steps:
       - uses: actions/checkout@v4
@@ -49,16 +48,6 @@ jobs:
           tags: |
             docker.dbrose.uk/${{ vars.IMAGE_NAME }}:${{ steps.version.outputs.version }}
             docker.dbrose.uk/${{ vars.IMAGE_NAME }}:latest
-
-      - name: Mark first push complete
-        if: vars.FIRST_PUSH_DONE != 'true'
-        run: |
-          curl -sf -X PATCH \
-            "https://api.github.com/repos/${{ github.repository }}/actions/variables/FIRST_PUSH_DONE" \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{"name":"FIRST_PUSH_DONE","value":"true"}'
-          echo "✅ FIRST_PUSH_DONE set to true"
 
       - name: Deploy via Portainer API
         if: vars.FIRST_PUSH_DONE == 'true'
